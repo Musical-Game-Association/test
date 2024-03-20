@@ -45,10 +45,10 @@
 <body>
     <div class="container">
         <div class="title">Mugassn音游社—身份识别</div> <!-- 这里的标题字体大小已经调小了 -->
-        <input type="password" class="password-input" id="password" placeholder="请输入密码">
+        <input type="password" class="password-input" id="password" placeholder="请输入密码" onkeydown="checkEnter(event)">
         <button class="submit-button" onclick="verifyPassword()">提交</button>
     </div>
 
-    <script src="passwords.js"></script>
+    <script src="passwordVerification.js"></script>
 </body>
 </html>
