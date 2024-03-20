@@ -1,11 +1,6 @@
-// 密码和对应的网址存储在一个对象中
-var passwordUrls = {
-    "0220": "https://score.mugassn.com",
-    "1234": "https://example.com",
-    "5678": "https://another-example.com",
-    "abcd": "https://yet-another-example.com"
-    // 可以继续添加更多的密码和对应的网址
-};
+// 密码和对应的网址分别存储在两个数组中
+var passwords = ["0220", "1234", "5678", "abcd"]; // 密码数组
+var urls = ["https://score.mugassn.com", "https://example.com", "https://another-example.com", "https://yet-another-example.com"]; // 网址数组
 
 // Function to verify the password and redirect to the corresponding URL
 function verifyPassword() {
@@ -15,16 +10,10 @@ function verifyPassword() {
         return;
     }
     
-    var isValidPassword = false;
-    for (var key in passwordUrls) {
-        if (password === key) {
-            isValidPassword = true;
-            window.location.href = passwordUrls[key]; // 如果密码存在于对象中，则跳转至对应网址
-            break;
-        }
-    }
-
-    if (!isValidPassword) {
+    var index = passwords.indexOf(password);
+    if (index !== -1) {
+        window.location.href = urls[index]; // 如果密码存在于密码数组中，则跳转至对应的网址数组中的对应位置
+    } else {
         alert('密码错误！');
     }
 }
