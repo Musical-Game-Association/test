@@ -5,7 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proxy Service GYID</title>
     <style>
-        /* 省略CSS样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20% auto;
+            max-width: 80%;
+        }
+        .title {
+            font-size: 20px; /* 修改这里的字体大小 */
+            margin-bottom: 20px;
+        }
+        .verification-input, .password-input {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 80%;
+            max-width: 300px;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -23,8 +60,143 @@
         <input type="text" id="inputCode" placeholder="请输入验证码" style="width: 80%; max-width: 300px;"><br>
         <button onclick="validateCode()" style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; width: 80%; max-width: 300px;">确定</button>
     </div>
+    <script>
+        var verified = false;
 
-    <script src="passwords.js" defer></script>
-    <script src="your_script.js" defer></script>
+        // Function to open the verification popup
+        function openVerificationPopup() {
+            document.getElementById('verificationPopup').classList.remove('hidden');
+            showCode(); // Generate and display the verification code
+        }
+
+        // Function to close the verification popup
+        function closeVerificationPopup() {
+            document.getElementById('verificationPopup').classList.add('hidden');
+        }
+
+        // Function to verify the password
+        function verifyPassword() {
+            var password = document.getElementById('password').value;
+            if (password === 'Jhaan') {
+                window.location.href = 'https://www.mugassn.com';
+            } else if (password === 'Kevin') {
+                window.location.href = 'https://www.kevinwu.cc';
+            } else if (password === 'Ben') {
+                window.location.href = 'https://timewaster43.github.io'; // Replace example.com with the desired website
+            } else {
+                alert('未查询存在该识别码，请核实！');
+            }
+        }
+
+        // Function to validate the verification code
+        function validateCode() {
+            var inputCode = document.getElementById('inputCode').value.toUpperCase();
+            var text = sessionStorage.getItem('text').toUpperCase();
+            if (inputCode === text) {
+                alert('你已经是一只成熟的人类了！！');
+                verified = true;
+                closeVerificationPopup(); // Close the verification popup
+                document.getElementById('password').classList.remove('hidden');
+                document.getElementById('password').focus();
+                document.getElementById('password').select();
+                document.getElementById('verificationCode').classList.add('hidden'); // Hide the verification code input
+            } else {
+                alert('你真的不是一只机器人么？！o.O');
+                showCode(); // Show a new verification code image
+            }
+        }
+
+        // Function to check if Enter key is pressed
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                validateCode();
+            }
+        }
+
+        // Function to check the password
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            if ((password === 'Jhaan' || password === 'Kevin' || password === 'Ben') && verified) {
+                verifyPassword();
+            }
+        }
+
+        // Function to generate and display the verification code
+        function showCode() {
+            var image = document.getElementById('codeImg');
+            var obj = drawCode();
+            image.src = obj.base64;
+            sessionStorage.setItem('text', obj.text);
+        }
+
+        // Function to generate the verification code
+        function drawCode() {
+            var nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+                "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+                "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+            ];
+            var text = '';
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            canvas.width = 120;
+            canvas.height = 50;
+            context.fillStyle = '#00BEFD';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'white';
+            context.font = '25px Microsoft YaHei';
+            var rand = [],
+                x = [],
+                y = [];
+            for(var i = 0; i < 4; i++) {
+                rand.push(rand[i]);
+                rand[i] = nums[Math.floor(Math.random() * nums.length)];
+                x[i] = i * 20 + 10;
+                y[i] = Math.random() * 20 + 20;
+                context.fillText(rand[i], x[i], y[i]);
+            }
+            for(var i = 0; i < 2; i++) {
+                drawline(canvas, context);
+            }
+            for(var i = 0; i < 20; i++) {
+                drawDot(canvas, context);
+            }
+            var base64 = convertCanvasToImage(canvas);
+            text = rand.join('').toUpperCase();
+            return {
+                base64: base64,
+                text: text
+            };
+        }
+
+        // Function to draw random lines
+        function drawline(canvas, context) {
+            context.moveTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height));
+            context.lineTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height));
+            context.lineWidth = 0.5;
+            context.strokeStyle = 'rgba(50,50,50,0.3)';
+            context.stroke();
+        }
+
+        // Function to draw random dots
+        function drawDot(canvas, context) {
+            var px = Math.floor(Math.random() * canvas.width),
+                py = Math.floor(Math.random() * canvas.height);
+            context.moveTo(px, py);
+            context.lineTo(px + 1, py + 1);
+            context.lineWidth = 0.1;
+            context.stroke();
+        }
+
+        // Function to convert canvas to image
+        function convertCanvasToImage(canvas) {
+            try {
+                return canvas.toDataURL('image/png');
+            } catch (e) {
+                console.error('该浏览器版本不支持：canvas.toDataURL("image/png")');
+            }
+        }
+    </script>
 </body>
 </html>
