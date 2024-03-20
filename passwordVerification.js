@@ -1,3 +1,4 @@
+// 密码和对应的网址存储在一个对象中
 var passwordUrls = {
     "0220": "https://score.mugassn.com",
     "1234": "https://example.com",
@@ -13,10 +14,17 @@ function verifyPassword() {
         alert('请输入密码！');
         return;
     }
-    var url = passwordUrls[password];
-    if (url) {
-        window.location.href = url; // 如果密码存在于对象中，则跳转至对应网址
-    } else {
+    
+    var isValidPassword = false;
+    for (var key in passwordUrls) {
+        if (password === key) {
+            isValidPassword = true;
+            window.location.href = passwordUrls[key]; // 如果密码存在于对象中，则跳转至对应网址
+            break;
+        }
+    }
+
+    if (!isValidPassword) {
         alert('密码错误！');
     }
 }
