@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Service GYID</title>
+    <style>
+        /* 省略CSS样式 */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">GYID Proxy Service</div> <!-- 这里的标题字体大小已经调小了 -->
+        <input type="text" class="verification-input" id="verificationCode" placeholder="请输入验证码" onclick="openVerificationPopup()" onkeydown="checkEnter(event)">
+        <input type="password" class="password-input hidden" id="password" placeholder="请输入识别码" oninput="checkPassword()">
+        <button class="submit-button hidden" onclick="verifyPassword()">提交</button>
+    </div>
+
+    <!-- Verification Popup -->
+    <div id="verificationPopup" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 16px;">看不清请点击图片切换</h2> <!-- 这里的标题字体大小已经调小了 -->
+        <img id="codeImg" onclick="showCode()" alt="校验码图" style="max-width: 100%;">
+        <input type="text" id="inputCode" placeholder="请输入验证码" style="width: 80%; max-width: 300px;"><br>
+        <button onclick="validateCode()" style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; width: 80%; max-width: 300px;">确定</button>
+    </div>
+
+    <script src="passwords.js" defer></script>
+    <script src="your_script.js" defer></script>
+</body>
+</html>
