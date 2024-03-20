@@ -3,40 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Service</title>
+    <title>Mugassn音游社—验证页</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
             margin: 0;
-            background-color: #f7f7f7;
+            padding: 0;
+            background-color: #f0f0f0;
         }
         .container {
             text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20% auto;
+            max-width: 80%;
         }
         .title {
-            font-size: 2em;
+            font-size: 20px; /* 修改这里的字体大小 */
             margin-bottom: 20px;
         }
         .password-input {
+            padding: 10px;
             margin-bottom: 20px;
+            width: 80%;
+            max-width: 300px;
         }
-        @media (max-width: 600px) {
-            .title {
-                font-size: 1.5em;
-            }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 80%;
+            max-width: 300px;
         }
     </style>
-    <script src="passwords.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <div class="title">Proxy Service for GY Students</div>
-        <input type="password" class="password-input" id="password" placeholder="请输入验证码">
-        <button onclick="verifyPassword(document.getElementById('password').value)">提交</button>
+        <div class="title">Mugassn音游社—身份识别</div> <!-- 这里的标题字体大小已经调小了 -->
+        <input type="password" class="password-input" id="password" placeholder="请输入密码">
+        <button class="submit-button" onclick="verifyPassword()">提交</button>
     </div>
+
+    <script>
+        // Function to verify the password
+        function verifyPassword() {
+            var password = document.getElementById('password').value;
+            if (password === '0220') {
+                window.location.href = 'https://score.mugassn.com';
+            } else {
+                alert('未查询存在该识别码，请核实！');
+            }
+        }
+    </script>
 </body>
 </html>
