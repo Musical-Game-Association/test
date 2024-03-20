@@ -1,16 +1,15 @@
-var passwordMap = {
-    'Jhaan': 'https://www.mugassn.com',
-    'Kevin': 'https://www.kevinwu.cc',
-    'Ben': 'https://timewaster43.github.io',
-    'NewPassword': 'https://www.newwebsite.com'
-};
+// verifyPassword.js
 
-// 导出函数以验证密码并进行相应的跳转
 function verifyPassword(password) {
-    var url = passwordMap[password];
-    if (url) {
-        window.location.href = url;
-    } else {
-        alert('未查询存在该识别码，请核实！');
+    switch(password) {
+        case '0220':
+            window.location.href = 'https://score.mugassn.com';
+            break;
+        case '1234': // 假设另一个密码是 '1234'，并将其跳转到另一个网站
+            window.location.href = 'https://example.com';
+            break;
+        // 添加更多密码和相应的跳转网站
+        default:
+            alert('未查询到存在该验证码，请核实！');
     }
 }
