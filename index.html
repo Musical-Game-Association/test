@@ -114,13 +114,17 @@
         }
 
         // Function to check the password
+  <script src="passwords.js"></script>
+<script>
+        var verified = false;
+
+        // Function to check the password
         function checkPassword() {
             var password = document.getElementById('password').value;
-            if ((password === 'Jhaan' || password === 'Kevin' || password === 'Ben') && verified) {
-                verifyPassword();
+            if (verified) {
+                verifyPassword(password);
             }
         }
-
         // Function to generate and display the verification code
         function showCode() {
             var image = document.getElementById('codeImg');
