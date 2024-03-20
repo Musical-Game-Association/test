@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugassn音游社—验证页</title>
+    <title>GY Proxy Service</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,11 +44,35 @@
 </head>
 <body>
     <div class="container">
-        <div class="title">Mugassn音游社—身份识别</div> <!-- 这里的标题字体大小已经调小了 -->
-        <input type="password" class="password-input" id="password" placeholder="请输入密码" onkeydown="checkEnter(event)">
+        <div class="title">GY Proxy Service</div>
+        <input type="password" class="password-input" id="password" placeholder="请输入识别码" onkeydown="checkEnter(event)">
         <button class="submit-button" onclick="verifyPassword()">提交</button>
     </div>
 
-    <script src="passwordVerification.js"></script>
+    <script src="pw.js"></script>
+    <script>
+        // Function to verify the password and redirect to the corresponding URL
+        function verifyPassword() {
+            var password = document.getElementById('password').value;
+            if (password.trim() === '') {
+                alert('请输入识别码！');
+                return;
+            }
+
+            var index = passwords.indexOf(password);
+            if (index !== -1) {
+                window.location.href = urls[index];
+            } else {
+                alert('未查询包含该识别码，请核实！');
+            }
+        }
+
+        // Function to check if Enter key is pressed
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                verifyPassword();
+            }
+        }
+    </script>
 </body>
 </html>
