@@ -1,4 +1,3 @@
-// 密码和对应的网址存储在一个对象中
 var passwordUrls = {
     "0220": "https://score.mugassn.com",
     "1234": "https://example.com",
